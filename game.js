@@ -173,26 +173,20 @@ function draw(canvas, ctx, player1NameInput, player2NameInput) {
     let newHead2 = { x: snake2X, y: snake2Y };
     let player1Lost = snake1X < 0 || snake1Y < 0 || snake1X >= canvas.width || snake1Y >= canvas.height || collision(newHead1, snake1) || collision(newHead1, snake2);
     let player2Lost = snake2X < 0 || snake2Y < 0 || snake2X >= canvas.width || snake2Y >= canvas.height || collision(newHead2, snake2) || collision(newHead2, snake1);
-
-    if (player1Lost) {
-        saveTopScore(player1NameInput.value, score1);
-    }
-
-    if (player2Lost) {
-        saveTopScore(player2NameInput.value, score2);
-    }
-    if (player1Lost && player2Lost) {
+    
+    if (player1Lost || player2Lost) {
         clearInterval(game);
-        gameOverMessage.textContent = 'Game Over! Both players lost.';
+        if (player1Lost && player2Lost) {
+            gameOverMessage.textContent = 'Game Over! Both players lost.';
+        } else if (player1Lost) {
+            gameOverMessage.textContent = `${player1NameInput.value || "Player 1"} lost!`;
+            saveTopScore(player1NameInput.value, score1);
+        } else if (player2Lost) {
+            gameOverMessage.textContent = `${player2NameInput.value || "Player 2"} lost!`;
+            saveTopScore(player2NameInput.value, score2);
+        }
         gameOverMessage.style.display = 'block'; // Show the game over message
-    } else if (player1Lost) {
-        clearInterval(game);
-        gameOverMessage.textContent = `${player1NameInput.value || "Player 1"} lost!`;
-        gameOverMessage.style.display = 'block'; // Show the game over message
-    } else if (player2Lost) {
-        clearInterval(game);
-        gameOverMessage.textContent = `${player2NameInput.value || "Player 2"} lost!`;
-        gameOverMessage.style.display = 'block'; // Show the game over message
+        return;
     }
 
     // Check if snake1 reaches a goal
@@ -220,7 +214,9 @@ function draw(canvas, ctx, player1NameInput, player2NameInput) {
     const player1Name = player1NameInput?.value.trim() || "Player 1";
     const player2Name = player2NameInput?.value.trim() || "Player 2";
     ctx.fillText(player1Name + ": " + score1, 2 * box, 1.6 * box);
+    ctx.fillStyle = '#orange';
     ctx.fillText(player2Name + ": " + score2, 2 * box, 3.6 * box);
+    ctx.fillStyle = '#00FF00';
 
     // Adjust speed if snake is in blue area or sand dune
     if (isInBlueArea(snake1[0].x, snake1[0].y, blueAreas) || isInBlueArea(snake2[0].x, snake2[0].y, blueAreas)) {

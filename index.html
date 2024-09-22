@@ -5,25 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game Multiplayer</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        #gameOverMessage {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background-color: white;
-            padding: 20px;
-            border: 2px solid black;
-            z-index: 1000;
-        }
-    </style>
 </head>
 <body>
     <div style="display: flex; gap: 10px; align-items: center;">
-        <input type="text" id="player1Name" placeholder="Player 1 Name">
-        <input type="text" id="player2Name" placeholder="Player 2 Name">
+        <input type="text" id="player1Name" placeholder="Player 1 Name" class="orange">
+        <input type="text" id="player2Name" placeholder="Player 2 Name" class="green">
         <button id="restartButton">Restart Game</button>
         <button id="reportBugButton">Report a Bug</button>
+        <button id="rulesButton">Game Rules</button>
+        <div id="rules" style="display: none; border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">
+            <h3>Game Rules</h3>
+            <ul>
+            <li>Player1 uses arrow keys, player2 uses awsd.</li>
+            <li>Eat the food to grow longer.</li>
+            <li>Avoid running into walls or the snake's own body.</li>
+            <li>Purple squares is where you can drop food to get points.</li>
+            <li>The game ends if you collide with yourself or the walls.</li>
+            </ul>
+        </div>
+        <script>
+            document.getElementById('rulesButton').addEventListener('click', function() {
+            var rulesDiv = document.getElementById('rules');
+            if (rulesDiv.style.display === 'none') {
+                rulesDiv.style.display = 'block';
+            } else {
+                rulesDiv.style.display = 'none';
+            }
+            });
+        </script>
+
     </div>
     <canvas id="gameCanvas" width="1280" height="1280"></canvas>
     <div id="gameOverMessage">
