@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game Multiplayer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #gameOverMessage {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 20px;
+            border: 2px solid black;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <input type="text" id="player1Name" placeholder="Player 1 Name">
+        <input type="text" id="player2Name" placeholder="Player 2 Name">
+        <button id="restartButton">Restart Game</button>
+        <button id="reportBugButton">Report a Bug</button>
+    </div>
+    <canvas id="gameCanvas" width="1280" height="1280"></canvas>
+    <div id="gameOverMessage">
+        Game Over!
+    </div>
+
+    <script src="game.js" type="module"></script>
+    <script>
+        document.getElementById('reportBugButton').addEventListener('click', function() {
+            window.location.href = 'mailto:n3m8tz@gmail.com?subject=Bug Report for Snake Game Multiplayer';
+        });
+    </script>
+</body>
+</html>

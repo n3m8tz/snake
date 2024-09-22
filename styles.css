@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000;
+}
+canvas {
+    border: 1px solid #fff;
+}
+button, input {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #c28744; /* Set text color to white */
+    background-color: #000000; /* Set background color to dark grey for better visibility */
+    border: 1px solid #fff; /* Add a white border for better visibility */
+}
